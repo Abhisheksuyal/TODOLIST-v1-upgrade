@@ -77,11 +77,13 @@ const newItem = new Item({
   name: itemname
 });
 
-if(kindofList==="today"){
+if(kindofList==="Today"){
 newItem.save();
   res.redirect("/");
 }else{
   List.findOne({name: kindofList},function(err,foundList){
+    if(err)
+    console.log(err);
     foundList.items.push(newItem);
     foundList.save();
     res.redirect("/"+kindofList);
